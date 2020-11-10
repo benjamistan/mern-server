@@ -5,7 +5,7 @@ const app = express();
 // req variable is the request, res is the response express sends back
 // here we're sending back some JSON
 app.get('/', (req, res) => {
-    res.send({ hi: 'there' });
+    res.send({ bye: 'buddy' });
 });
 
 const PORT = process.env.PORT || 5000;
