@@ -5,6 +5,15 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const User = mongoose.model('users');       // single argument means we're fetching from mongoose (two args is creating)
 
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    User.findById(id)
+        .then(user => done(null,user));
+});
+
 passport.use(
     new GoogleStrategy(
         {
