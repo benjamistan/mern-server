@@ -10,13 +10,16 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-// creates a 30-day cookie
+// CookieSession middleware creates a 30-day cookie
 app.use(
     cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 1000,   // 30 days, 24hrs, 60 mins, 60 seconds, 1000 miliseconds. Nasty. 
         keys: [keys.cookieKey]
     })
 );
+
+// Passport middleware initialises and manages the authentication and 
+// checking of existing cookies against the users in db
 app.use(passport.initialize());
 app.use(passport.session());
 
