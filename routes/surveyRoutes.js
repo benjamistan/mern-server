@@ -25,6 +25,11 @@ module.exports = app => {
 
         const events = _.chain(req.body)
             .map(({ email, url }) => {
+            
+                if (!url) {
+                return res.status(400).json({ error: 'URL not found' });
+            }
+
             const match = p.test(new URL(url).pathname);
                 if (match) {
                     return { email, surveyId: match.surveyId, choice: match.choice };
